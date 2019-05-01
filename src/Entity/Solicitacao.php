@@ -23,6 +23,17 @@ class Solicitacao
      */
     private $ListaDeProdutos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Solicitante;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dataDeCriacao;
+
     public function __construct()
     {
         $this->ListaDeProdutos = new ArrayCollection();
@@ -60,6 +71,30 @@ class Solicitacao
                 $listaDeProduto->setSolicitacao(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSolicitante(): ?User
+    {
+        return $this->Solicitante;
+    }
+
+    public function setSolicitante(?User $Solicitante): self
+    {
+        $this->Solicitante = $Solicitante;
+
+        return $this;
+    }
+
+    public function getDataDeCriacao(): ?\DateTimeInterface
+    {
+        return $this->dataDeCriacao;
+    }
+
+    public function setDataDeCriacao(\DateTimeInterface $dataDeCriacao): self
+    {
+        $this->dataDeCriacao = $dataDeCriacao;
 
         return $this;
     }
