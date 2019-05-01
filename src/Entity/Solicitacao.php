@@ -19,13 +19,13 @@ class Solicitacao
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SolicitacaoProduto", mappedBy="solicitacao", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\SolicitacaoProduto", mappedBy="solicitacao", orphanRemoval=true, cascade={"persist"})
      */
     private $ListaDeProdutos;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Solicitante;
 
@@ -33,6 +33,25 @@ class Solicitacao
      * @ORM\Column(type="datetime")
      */
     private $dataDeCriacao;
+
+    /** @ORM\Column(type="string", nullable=true) */
+    private $marking;
+
+    /**
+     * @return mixed
+     */
+    public function getMarking()
+    {
+        return $this->marking;
+    }
+
+    /**
+     * @param mixed $marking
+     */
+    public function setMarking($marking): void
+    {
+        $this->marking = $marking;
+    }
 
     public function __construct()
     {

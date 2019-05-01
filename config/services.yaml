@@ -26,3 +26,17 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    admin.produto:
+        class: App\Admin\ProdutoAdmin
+        arguments: [~, App\Entity\Produto, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Produto }
+        public: true
+
+    admin.solicitacao:
+        class: App\Admin\SolicitacaoAdmin
+        arguments: [~, App\Entity\Solicitacao, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Solicitacao }
+        public: true

@@ -1,0 +1,26 @@
+framework:
+    workflows:
+        solicitacao:
+            type: 'state_machine'
+            supports:
+                - App\Entity\Solicitacao
+            initial_place: criado
+            places:
+                - criado
+                - aguardando_aprovacao_conselho
+                - aguardando_aprovacao_diretor
+                - aprovado
+            transitions:
+                encaminhar_conselho:
+                    from: criado
+                    to: aguardando_aprovacao_conselho
+                encaminhar_diretor:
+                    from: aguardando_aprovacao_conselho
+                    to: aguardando_aprovacao_diretor
+                aprovar:
+                    from: aguardando_aprovacao_diretor
+                    to: aprovado
+                rejeitar:
+                    from: [aguardando_aprovacao_conselho, aguardando_aprovacao_diretor]
+                    to: criado
+
